@@ -21,7 +21,25 @@
 			this.y = y;
 			this.direction = direction;
 		}
-		moveForward(){
+		moveForward(sizeOfxAxis,sizeOfyAxis){
+			if(this.direction == 0)
+				this.y = (this.y + 1)%sizeOfyAxis;
+
+			else if(this.direction == 1)
+				this.x = (this.x + 1)%sizeOfxAxis;
+
+			else if(this.direction == 2){
+				this.y = (this.y - 1);
+				if(this.y < 0)
+					this.y += sizeOfyAxis
+			}
+
+			else if(this.direction == 3){
+				this.x = (this.x - 1);
+				if(this.x < 0)
+					this.x += sizeOfxAxis
+			}
+
 		}
 		moveBackward(){
 
@@ -41,7 +59,8 @@
 		
 	}
 	let Directions = ['N','E','S','W'];
-
+	let sizeOfxAxis = 3;
+	let sizeOfyAxis = 3;
 	let rover = new Rover(0,0,0);
 	console.log(rover);
 	function submit() {
@@ -51,6 +70,11 @@
 		 for (i = 0; i < commandArray.length; i++) { 
 		 		if(commandArray[i] == "R" || commandArray[i] == "L")
 					rover.turn(commandArray[i], Directions.length);
+				else if(commandArray[i] == "F")
+					rover.moveForward(sizeOfxAxis,sizeOfyAxis);
+				else if(commandArray[i] == "B" )
+					rover.moveBackward();
+				console.log(rover);
 		}
 		document.getElementById("outputLocation").value =commandArray;
 
