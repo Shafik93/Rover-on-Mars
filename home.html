@@ -80,8 +80,11 @@
 	console.log(rover);
 	function submit() {
 		let getInput = document.getElementById("arrayInput").value;
-		 commandArray = [];
-		 commandArray.push(getInput.split(','));
+		let temp = getInput.split(',');
+		let commandArray = [];
+		for(i=0; i < temp.length; i++){
+			commandArray.push(temp[i]);
+		}
 		 for (i = 0; i < commandArray.length; i++) { 
 		 		if(commandArray[i] == "R" || commandArray[i] == "L")
 					rover.turn(commandArray[i], Directions.length);
