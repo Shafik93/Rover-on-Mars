@@ -5,14 +5,16 @@
 </head>
 <body>
 	<label>Please insert your commands</label><br>
-	<input type="text" name="text" id="arrayInput"></input>
-	<p id="outputLocation"></p>
+	<input type="text" name="text" id="arrayInput" value=""></input><br>
+	<button onclick="submit()">Submit</button>
+	<label>The rover is at</label><br>
+	<input type="text" name="text" id="outputLocation" value=""></input>
+	
 </body>
 </html>
 
 <script type="text/javascript">
 	class Rover{
-		Directions = ['N','E','S','W'];
 
 		constructor(x,y,direction){
 			this.x = x;
@@ -20,14 +22,39 @@
 			this.direction = direction;
 		}
 		moveForward(){
-
 		}
 		moveBackward(){
 
 		}
-		turn(){
+		turn(direction, sizeOfDirectionArray){
+			if(direction == "R"){
 
+				this.direction += 1;
+				this.direction = this.direction%sizeOfDirectionArray;
+			}
+			else{
+				this.direction -= 1;
+				if(this.direction < 0)
+					this.direction+=4;
+			}
 		}
+		
 	}
+	let Directions = ['N','E','S','W'];
+
+	let rover = new Rover(0,0,0);
+	console.log(rover);
+	function submit() {
+		let getInput = document.getElementById("arrayInput").value;
+		 commandArray = [];
+		 commandArray.push(getInput.split(','));
+		 for (i = 0; i < commandArray.length; i++) { 
+		 		if(commandArray[i] == "R" || commandArray[i] == "L")
+					rover.turn(commandArray[i], Directions.length);
+		}
+		document.getElementById("outputLocation").value =commandArray;
+
+	}
+
 
 </script>
